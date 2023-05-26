@@ -44,6 +44,8 @@ static void	ft_print_arg(t_set *pSet, int *nPrinted)
 	{
 		ft_putstr_fd(p_argstring, 1);
 		free(p_argstring);
+		if (pSet->c_type == '\0')
+			pSet->f_error = 14;
 	}
 	else
 		pSet->f_error = 13;

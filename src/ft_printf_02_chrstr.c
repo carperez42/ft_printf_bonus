@@ -16,24 +16,25 @@
 // placeholders that correspond to char argument.
 char	*ft_print_chr(t_set *pSet, int *nPrinted)
 {
-	char	*p_buffer;
-	char	arg_char;
+	char		*p_buffer;
+	char		arg_char;
 
 	p_buffer = NULL;
+	pSet->l_arg = 1;
 	if (pSet->c_type != '%')
-		arg_char = (char) va_arg(pSet->lst_items, long int);
+		arg_char = va_arg(pSet->lst_items, long int);
 	else
 		arg_char = '%';
-	pSet->l_arg = 1;
 	if (pSet->l_gap_1[1] > pSet->l_arg)
 		pSet->l_arg = pSet->l_gap_1[1];
+	pSet->c_type = arg_char;
 	p_buffer = ft_buffer_creator(pSet->l_arg, ' ');
 	if (p_buffer != NULL)
 	{
-		if (pSet->f_left[1] != 0 && arg_char != 0)
+		if (pSet->f_left[1])
 			p_buffer[0] = arg_char;
 		else
-			p_buffer[pSet->l_arg - 1] = arg_char;
+				p_buffer[pSet->l_arg - 1] = arg_char;
 		*nPrinted += pSet->l_arg;
 	}
 	return (p_buffer);
