@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_07_uns.c                                 :+:      :+:    :+:   */
+/*   ft_printf_06_uns.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carperez <carperez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,10 +15,10 @@
 // "ft_buffer_filler_1" initializes the resulting string based on the previous
 // analysis of the precision and the remaining flags contained in the 
 // specifier placeholder.
-static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set pSet)
+static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set sSet)
 {	
-	if (pSet.l_arg > (int)ft_strlen(sOri))
-		ft_memcpy((sDest + pSet.l_arg - ft_strlen(sOri)),
+	if (sSet.l_arg > (int)ft_strlen(sOri))
+		ft_memcpy((sDest + sSet.l_arg - ft_strlen(sOri)),
 			sOri, ft_strlen(sOri));
 	else
 		ft_memcpy(sDest, sOri, ft_strlen(sOri));
@@ -28,19 +28,19 @@ static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set pSet)
 // "ft_buffer_filler_2" initializes a string of a length equal to the configured
 // width or equal to the length of the source string, and it tabs it according
 // to whether the '-' flag is activated or not.
-static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set pSet)
+static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set sSet)
 {
 	int		n_chg;
 	int		ia;
 
-	ia = pSet.l_arg;
+	ia = sSet.l_arg;
 	n_chg = ft_strlen(sOri);
-	if (pSet.f_left[1])
+	if (sSet.f_left[1])
 		ft_memcpy(sDest, sOri, n_chg);
 	else
 	{
-		if (!pSet.f_zero[1] || (pSet.f_zero[1] && ia <= n_chg)
-			|| (pSet.f_zero[1] && pSet.f_dot[1]))
+		if (!sSet.f_zero[1] || (sSet.f_zero[1] && ia <= n_chg)
+			|| (sSet.f_zero[1] && sSet.f_dot[1]))
 		{
 			ia = ia - n_chg;
 			ft_memcpy((sDest + ia), sOri, n_chg);
@@ -48,7 +48,7 @@ static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set pSet)
 		else
 		{
 			ft_memset(sDest, '0', ia);
-			ft_buffer_filler_1(sDest, sOri, pSet);
+			ft_buffer_filler_1(sDest, sOri, sSet);
 		}
 	}
 	return (sDest);

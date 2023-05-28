@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_tools_c.c                                :+:      :+:    :+:   */
+/*   ft_printf_09_tools.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carperez <carperez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,13 +17,18 @@
 char	*ft_buffer_creator(size_t nDimension, char cFiller)
 {
 	char	*p_new;
+	int		ia;
 
+	ia = 0;
 	p_new = (char *)malloc((nDimension + 1) * sizeof(char));
 	if (p_new != NULL)
 	{
-		p_new[nDimension] = '\0';
-		while (nDimension --)
-			p_new[nDimension] = cFiller;
+		while (ia < (int)nDimension)
+		{
+			p_new[ia] = cFiller;
+			ia ++;
+		}
+		p_new[ia] = '\0';
 	}
 	return (p_new);
 }

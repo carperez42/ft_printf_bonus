@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_06_ptr.c                                 :+:      :+:    :+:   */
+/*   ft_printf_05_ptr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carperez <carperez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,16 +14,16 @@
 
 // "ft_buffer_filler_1" ensures the right position of the obligatory hex prefix
 // , and the + simbol or space, just in case.
-static char	*ft_buffer_filler_1(char *sDest, t_set pSet, int nCmp, int nMode)
+static char	*ft_buffer_filler_1(char *sDest, t_set sSet, int nCmp, int nMode)
 {
 	char	*p_aux;
 
 	p_aux = NULL;
-	if ((pSet.f_sign[1] || pSet.f_space[1]) && nCmp)
+	if ((sSet.f_sign[1] || sSet.f_space[1]) && nCmp)
 	{
-		if (pSet.f_sign[1])
+		if (sSet.f_sign[1])
 			sDest[0] = '+';
-		if (pSet.f_space[1] && !pSet.f_sign[1])
+		if (sSet.f_space[1] && !sSet.f_sign[1])
 			sDest[0] = ' ';
 		sDest[2] = 'x';
 	}
@@ -44,25 +44,25 @@ static char	*ft_buffer_filler_1(char *sDest, t_set pSet, int nCmp, int nMode)
 // "ft_buffer_filler_2" initializes a string of a length equal to the configured
 // width or equal to the length of the source string, and it tabs it according
 // to whether the '-' flag is activated or not.
-static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set pSet
+static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set sSet
 			, int nCmp)
 {
 	char	*p_aux;
 
 	p_aux = NULL;
-	if (pSet.f_left[1] || pSet.l_arg == (int)ft_strlen(sOri))
+	if (sSet.f_left[1] || sSet.l_arg == (int)ft_strlen(sOri))
 		ft_memcpy(sDest, sOri, ft_strlen(sOri));
-	else if ((!pSet.f_left[1] && (!pSet.f_zero[1] || (pSet.f_zero[1]
-					&& pSet.f_dot[1]))) || !nCmp)
-		ft_memcpy(sDest + (pSet.l_arg - ft_strlen(sOri)), sOri,
+	else if ((!sSet.f_left[1] && (!sSet.f_zero[1] || (sSet.f_zero[1]
+					&& sSet.f_dot[1]))) || !nCmp)
+		ft_memcpy(sDest + (sSet.l_arg - ft_strlen(sOri)), sOri,
 			ft_strlen(sOri));
-	else if (!pSet.f_left[1] && pSet.f_zero[1] && !pSet.f_dot[1] && nCmp)
+	else if (!sSet.f_left[1] && sSet.f_zero[1] && !sSet.f_dot[1] && nCmp)
 	{
-		ft_memcpy(sDest + (pSet.l_arg - ft_strlen(sOri)), sOri,
+		ft_memcpy(sDest + (sSet.l_arg - ft_strlen(sOri)), sOri,
 			ft_strlen(sOri));
 		p_aux = ft_strrchr(sDest, 'x');
 		sDest[(unsigned int)(p_aux - sDest)] = '0';
-		ft_buffer_filler_1(sDest, pSet, nCmp, 1);
+		ft_buffer_filler_1(sDest, sSet, nCmp, 1);
 	}
 	return (sDest);
 }

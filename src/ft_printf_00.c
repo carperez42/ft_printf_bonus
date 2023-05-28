@@ -29,7 +29,7 @@ static void	ft_print_arg(t_set *pSet, int *nPrinted)
 
 	p_argstring = NULL;
 	if (pSet->c_type == 'c' || pSet->c_type == '%')
-		p_argstring = ft_print_chr(pSet, nPrinted);
+		ft_print_chr(pSet, nPrinted);
 	else if (pSet->c_type == 's')
 		p_argstring = ft_print_str(pSet, nPrinted);
 	else if (pSet->c_type == 'p')
@@ -40,16 +40,14 @@ static void	ft_print_arg(t_set *pSet, int *nPrinted)
 		p_argstring = ft_print_uns(pSet, nPrinted);
 	else if (pSet->c_type == 'x' || pSet->c_type == 'X')
 		p_argstring = ft_print_hex(pSet, nPrinted);
-	if (p_argstring != NULL)
+	if (p_argstring != NULL && pSet->c_type != 'c' && pSet->c_type != '%')
 	{
 		ft_putstr_fd(p_argstring, 1);
 		free(p_argstring);
-		if (pSet->c_type == '\0')
-			pSet->f_error = 14;
 	}
-	else
+	else if (pSet->c_type != 'c' && pSet->c_type != '%')
 		pSet->f_error = 13;
-}	
+}
 
 // "ft_pholder_capturer" confirms that the placeholder exists, analyzes its
 // configuration, and validates that it is legal. If the conditions are

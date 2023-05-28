@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_tools_a.c                                :+:      :+:    :+:   */
+/*   ft_printf_07_hex_aux.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carperez <carperez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,10 +14,10 @@
 
 // "ft_hexa_prefix" adds 0x or 0X prefix when it is activated by the placeholder
 // in hexadecimal format type.
-char	*ft_hexa_prefix(char *sDest, t_set pSet)
+char	*ft_hexa_prefix(char *sDest, t_set sSet)
 {
 	sDest[0] = '0';
-	sDest[1] = ft_toupper_char('x', pSet.c_type);
+	sDest[1] = ft_toupper_char('x', sSet.c_type);
 	return (sDest);
 }
 
@@ -54,7 +54,7 @@ static int	ft_hexa_sizer(int nOri)
 
 // "ft_hexa_converter" returns the number of effective hexadecimal symbols in
 // the converted string representation of the input number.
-static void	ft_hexa_converter(char *sDest, int nOri, t_set pSet)
+static void	ft_hexa_converter(char *sDest, int nOri, t_set sSet)
 {
 	char	s_hex[9];
 	int		ia;
@@ -74,7 +74,7 @@ static void	ft_hexa_converter(char *sDest, int nOri, t_set pSet)
 			ia ++;
 		while (ia <= 8)
 		{
-			*sDest = ft_toupper_char(s_hex[ia], pSet.c_type);
+			*sDest = ft_toupper_char(s_hex[ia], sSet.c_type);
 			sDest ++;
 			ia ++;
 		}

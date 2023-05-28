@@ -24,8 +24,9 @@ DIR_OBJ = obj/
 #C files
 FILES_SRC = ft_printf_00.c ft_printf_01_set.c ft_printf_02_chrstr.c\
 			ft_printf_03_int.c ft_printf_04_hex.c ft_printf_05_ptr.c\
-			ft_printf_06_uns.c ft_printf_tools_a.c ft_printf_tools_b.c\
-			ft_printf_tools_c.c
+			ft_printf_06_uns.c ft_printf_07_hex_aux.c\
+			ft_printf_08_unsptr_aux.c ft_printf_09_tools.c\
+
 SOURCERS = $(addprefix $(DIR_SRC),$(FILES_SRC))
 OBJECTS = $(addprefix $(DIR_OBJ),$(FILES_SRC:.c=.o))
 

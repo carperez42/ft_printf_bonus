@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_04_int.c                                 :+:      :+:    :+:   */
+/*   ft_printf_03_int.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carperez <carperez@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,27 +15,27 @@
 // "ft_buffer_filler_1" initializes the resulting string based on the previous
 // analysis of the precision and the remaining flags contained in the 
 // specifier placeholder.
-static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set pSet
+static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set sSet
 			, int nCmp)
 {	
-	if (nCmp < 0 && (pSet.l_arg > (int)ft_strlen(sOri)))
+	if (nCmp < 0 && (sSet.l_arg > (int)ft_strlen(sOri)))
 	{
 		sDest[0] = '-';
-		ft_memcpy((sDest + pSet.l_arg + 1 - ft_strlen(sOri)),
+		ft_memcpy((sDest + sSet.l_arg + 1 - ft_strlen(sOri)),
 			(sOri + 1), (ft_strlen(sOri) - 1));
 	}
-	else if (nCmp < 0 && (pSet.l_arg <= (int)ft_strlen(sOri)))
+	else if (nCmp < 0 && (sSet.l_arg <= (int)ft_strlen(sOri)))
 		ft_memcpy(sDest, sOri, ft_strlen(sOri));
-	else if (nCmp > 0 && (!pSet.f_sign[1] && !pSet.f_space[1]))
-		ft_memcpy((sDest + pSet.l_arg - ft_strlen(sOri)),
+	else if (nCmp > 0 && (!sSet.f_sign[1] && !sSet.f_space[1]))
+		ft_memcpy((sDest + sSet.l_arg - ft_strlen(sOri)),
 			sOri, ft_strlen(sOri));
 	else
 	{
-		if (pSet.f_sign[1])
+		if (sSet.f_sign[1])
 			sDest[0] = '+';
-		if (pSet.f_space[1] && !pSet.f_sign[1])
+		if (sSet.f_space[1] && !sSet.f_sign[1])
 			sDest[0] = ' ';
-		ft_memcpy((sDest + pSet.l_arg - ft_strlen(sOri)),
+		ft_memcpy((sDest + sSet.l_arg - ft_strlen(sOri)),
 			sOri, ft_strlen(sOri));
 	}
 	return (sDest);
@@ -44,20 +44,20 @@ static char	*ft_buffer_filler_1(char *sDest, char const *sOri, t_set pSet
 // "ft_buffer_filler_2" initializes a string of a length equal to the configured
 // width or equal to the length of the source string, and it tabs it according
 // to whether the '-' flag is activated or not.
-static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set pSet
+static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set sSet
 			, int nCmp)
 {
 	int		n_chg;
 	int		ia;
 
-	ia = pSet.l_arg;
+	ia = sSet.l_arg;
 	n_chg = ft_strlen(sOri);
-	if (pSet.f_left[1])
+	if (sSet.f_left[1])
 		ft_memcpy(sDest, sOri, n_chg);
 	else
 	{
-		if (!pSet.f_zero[1] || (pSet.f_zero[1] && ia <= n_chg)
-			|| (pSet.f_zero[1] && pSet.f_dot[1]))
+		if (!sSet.f_zero[1] || (sSet.f_zero[1] && ia <= n_chg)
+			|| (sSet.f_zero[1] && sSet.f_dot[1]))
 		{
 			ia = ia - n_chg;
 			ft_memcpy((sDest + ia), sOri, n_chg);
@@ -65,11 +65,11 @@ static char	*ft_buffer_filler_2(char *sDest, char const *sOri, t_set pSet
 		else
 		{
 			ft_memset(sDest, '0', ia);
-			ft_buffer_filler_1(sDest, sOri, pSet, nCmp);
+			ft_buffer_filler_1(sDest, sOri, sSet, nCmp);
 		}
-		if (pSet.f_zero[1] && pSet.l_gap_1[1] > (int)ft_strlen(sOri)
-			&& ((pSet.f_sign[1] || pSet.f_space[1]) && !pSet.f_dot[1]))
-			sDest[pSet.l_arg - ft_strlen(sOri)] = '0';
+		if (sSet.f_zero[1] && sSet.l_gap_1[1] > (int)ft_strlen(sOri)
+			&& ((sSet.f_sign[1] || sSet.f_space[1]) && !sSet.f_dot[1]))
+			sDest[sSet.l_arg - ft_strlen(sOri)] = '0';
 	}
 	return (sDest);
 }
